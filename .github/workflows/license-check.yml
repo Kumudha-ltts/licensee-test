@@ -12,5 +12,5 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ruby-full -y
-          gem install licensee
+          sudo gem install licensee
           licensee detect .--json
