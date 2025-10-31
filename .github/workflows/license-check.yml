@@ -17,6 +17,15 @@ jobs:
       - name: Install and run Licensee
         run: |
           sudo apt-get update
-          sudo apt-get install ruby-full -y
+          sudo apt-get install ruby-full build-essential -y
           sudo gem install licensee
-          licensee detect .--json
+
+          echo"export PATH=(ruby -e'print Gem.user_dir')/bin:$PATH">> $GITHYB_ENV
+          echo" Ruby version: $(ruby -v)"
+          echo" Licensee installed at: $(which licensee || echo 'not found')"
+
+      - name: Run Licensee check
+        run: |
+          export PATH=$(ruby -e 'print Gem.user_dir')/bin:$PATH
+          licensee detect. --json
+          
